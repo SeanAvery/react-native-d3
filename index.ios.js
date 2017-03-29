@@ -3,6 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+import LineChart from './src/LineChart';
 
 import React, { Component } from 'react';
 import {
@@ -14,11 +15,11 @@ import {
 
 export default class react_native_d3 extends Component {
   render() {
+    console.log('checking console')
+    console.log('LineChart', LineChart)
     return (
-      <View style={styles.container}>
-        <Text>
-          react-native-d3
-        </Text>
+      <View>
+        <LineChart />
       </View>
     );
   }

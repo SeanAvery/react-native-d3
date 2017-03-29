@@ -10,8 +10,9 @@ const {
   Surface,
 } = ART;
 
-class LineChart extends Component {
+export default class LineChart extends Component {
   render() {
+    console.log('Surface', Surface);
     return (
       <Surface width={200} heigh={100}>
         <Group>
