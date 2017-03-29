@@ -7,6 +7,8 @@ import {
 
 import weather_data from './data/weather-data';
 
+import { createLineGraph } from './line-chart-lib/utils';
+
 const {
   Group,
   Shape,
@@ -15,11 +17,17 @@ const {
 
 export default class LineChart extends Component {
   render() {
-    console.log('weather_data', weather_data);
+    console.log('weather_data', weather_data.daily.data);
     const size = 200;
+    console.log('createLineGraph', createLineGraph);
     // const data = createLineGraph({
-    //   data:
-    // })
+    //   data: weather_data.daily.data,
+    //   width: size,
+    //   height: size,
+    //   xAccessor: d => new Date(d.time * 1000),
+    //   yAccessor: d => d.temperatureMax
+    // });
+
     return (
       <View>
         <Surface width={200} height={200}>
