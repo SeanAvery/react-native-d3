@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import {
   ART,
-  View
+  View,
+  Text,
+  StyleSheet,
 } from 'react-native';
 
 import weather_data from './data/weather-data';
@@ -17,9 +19,10 @@ const {
 
 export default class LineChart extends Component {
   render() {
-    console.log('weather_data', weather_data.daily.data);
     const size = 200;
-    // console.log('createLineGraph', createLineGraph);
+    const padding_size = 20;
+    const tick_width = padding_size * 2;
+
     const data = createLineGraph({
       data: weather_data.daily.data,
       width: size,
@@ -27,6 +30,8 @@ export default class LineChart extends Component {
       xAccessor: d => new Date(d.time * 1000),
       yAccessor: d => d.temperatureMax
     });
+
+    const tick_x_format = data.scale.x.tickFormat(null, '%b %d');
 
     return (
       <View>
@@ -39,7 +44,33 @@ export default class LineChart extends Component {
             />
           </Group>
         </Surface>
+
+        <View key={'ticksX'}>
+          {data.ticks.map((tick, index) => {
+            const tickStyles = {};
+            tickStyles.width = tick_width;
+            tickStyles.left = tick.x - (tick_width / 2);
+
+            return (
+              <Text key={index} style={[styles.tickLabelX, tickStyles]}>
+                {tick_x_format(new Date(tick.datum.time * 1000))}
+              </Text>
+            );
+          })}
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+
+  },
+  tickLabelX: {
+    position: 'absolute',
+    bottom: 0,
+    fontSize: 12,
+    textAlign: 'center'
+  },
+});
