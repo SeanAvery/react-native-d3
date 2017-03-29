@@ -5,6 +5,8 @@ import {
   View
 } from 'react-native';
 
+import weather_data from './data/weather-data';
+
 const {
   Group,
   Shape,
@@ -13,6 +15,11 @@ const {
 
 export default class LineChart extends Component {
   render() {
+    console.log('weather_data', weather_data);
+    const size = 200;
+    // const data = createLineGraph({
+    //   data:
+    // })
     return (
       <View>
         <Surface width={200} height={200}>
