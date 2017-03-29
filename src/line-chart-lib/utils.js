@@ -25,7 +25,7 @@ export function createLineGraph({
   const y_values = data.reduce((all, dataum) => {
     all.push(datum.temperatureMax);
     return all;
-  } []);
+  }, []);
 
   // get range of y values
   const y_range = array.extent(y_values);
