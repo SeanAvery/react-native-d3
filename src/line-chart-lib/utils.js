@@ -5,40 +5,41 @@ import * as array from 'd3-array';
 const d3 = {
   scale,
   shape,
+  array,
 };
 
 export function createLineGraph({
   data,
+  xAccessor,
+  yAccessor,
   width,
   height,
 }) {
-  const last_datum = data[data.length - 1];
+  const lastDatum = data[data.length-1];
 
-  // create x scale
-  const scale_x = createScaleX(
-    data[0].time,
-    lastDatum.time,
-    width
-  );
+  // create scale of x axis
+  const scaleX = d3.scale.scaleTime()
+    .domain([new Date(data[0].time * 1000), new Date(lastDatum.time * 1000)])
+    .range([0, width]);
 
-  // collect y values
-  const y_values = data.reduce((all, dataum) => {
-    all.push(datum.temperatureMax);
+  // collect all y values
+  const allYValues = data.reduce((all, datum) => {
+    all.push(yAccessor(datum));
     return all;
   }, []);
 
-  // get range of y values
-  const y_range = array.extent(y_values);
+  // get the min and max y values
+  const extentY = d3.array.extent(allYValues);
+  const scaleY = d3.scale.scaleLinear()
+    .domain([extentY[0], extentY[1]]).nice()
+    .range([height, 0]);
 
-  // create y scale
-  const sale_y = createScaleY(y_range[0]. y_rang[1], height);
+  // create line
+  const lineShape = d3.shape.line()
+    .x(d => scaleX(xAccessor(d)))
+    .y(d => scaleY(yAccessor(d)));
 
-  // use d3-shape line generator to create the `d={}` attribute
-  const line_shape = d3.shape.ine()
-    .x((d) => scale_x(d.time))
-    .y((d) => scale_y(d.temperatureMax));
-
-    return {
-      path: line_shape(data),
-    };
+  return {
+    path: lineShape(data),
+  };
 }
