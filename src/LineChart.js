@@ -81,7 +81,7 @@ export default class LineChart extends Component {
           })}
         </View>
 
-        <View key={'ticksYDot' style={styles.ticksYContainer}}>
+        <View key={'ticksYDot'} style={styles.ticksYContainer}>
           {data.ticks.map((tick, index) => {
             <View
               key={index}
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 2,
     height: 2,
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
     borderRadius: 100,
   },
   ticksYContainer: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 2,
     height: 2,
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
     borderRadius: 100
   }
 });
