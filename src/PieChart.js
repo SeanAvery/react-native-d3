@@ -34,6 +34,7 @@ export default class PieChart extends Component {
     this.sum = 0;
     this.sectors =[];
     this.arcs = [];
+    this.startAngle = 0;
   }
 
   componentWillMount() {
@@ -66,14 +67,16 @@ export default class PieChart extends Component {
     .then(() => {
       return this.sectors;
     }).map((sector, i) => {
-      calculateArc(sector);
+      calculateArc(sector, i);
     }).then(() => {
 
     })
   }
 
-  claculateArc(sector) {
-    // let endAngle
+  claculateArc(sector, i) {
+    let endAngle = this.startAngle + sector;
+    if (endAngle > 360) { endAngle = 360 };
+    this.startAngle = endAngle; 
   }
 
   createPieGraph() {
