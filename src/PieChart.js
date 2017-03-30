@@ -31,29 +31,32 @@ import { Wedge } from './pie-chart-lib/Wedge'
 export default class PieChart extends Component {
   constructor(props) {
     super(props);
+    this.sum = 0;
+    this.arcs = [];
   }
 
   componentWillMount() {
     Promise.delay(0).then(() => {
-      return this.calculateAngles();
-    }).then((sum) => {
-      console.log('sum', sum);
+      return this.getSum();
+    }).then(() => {
+      return this.createArcs();
     }).catch((error) => {
       console.log(error)
     });
   }
 
-  calculateAngles() {
+  getSum() {
     console.log('calculating angles...')
-    let sum = 0;
     data.forEach(n => {
-      sum += n.number;
+      this.sum += n.number;
       console.log('n', n);
     })
-    return sum;
   }
 
-
+  createArcs() {
+    const sectors = data.map(n => Math.floor(360 * (n.number/this.sum)));
+    console.log('sectors', sectors);
+  }
 
   createPieGraph() {
     const arcs = d3.shape.pie()
