@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Promise from 'bluebird';
 
 import {
   ART,
@@ -32,6 +33,28 @@ export default class PieChart extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    Promise.delay(0).then(() => {
+      return this.calculateAngles();
+    }).then((sum) => {
+      console.log('sum', sum);
+    }).catch((error) => {
+      console.log(error)
+    });
+  }
+
+  calculateAngles() {
+    console.log('calculating angles...')
+    let sum = 0;
+    data.forEach(n => {
+      sum += n.number;
+      console.log('n', n);
+    })
+    return sum;
+  }
+
+
+
   createPieGraph() {
     const arcs = d3.shape.pie()
   }
@@ -41,7 +64,7 @@ export default class PieChart extends Component {
       <View width={200} height={200}>
         <Surface>
           <Group x={100} y={100}>
-            <Wedge />
+
           </Group>
         </Surface>
       </View>
