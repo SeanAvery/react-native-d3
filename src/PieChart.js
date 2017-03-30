@@ -45,7 +45,7 @@ export default class PieChart extends Component {
     }).then(() => {
       return this.getArcs();
     }).then(() => {
-
+      console.log('Arc caclulations complete');
     }).catch((error) => {
       console.log(error)
     });
@@ -67,20 +67,40 @@ export default class PieChart extends Component {
     .then(() => {
       return this.sectors;
     }).map((sector, i) => {
-      calculateArc(sector, i);
+      this.calculateArc(sector, i);
     }).then(() => {
 
     })
   }
 
-  claculateArc(sector, i) {
+  calculateArc(sector, i) {
     let endAngle = this.startAngle + sector;
     if (endAngle > 360) { endAngle = 360 };
-    this.startAngle = endAngle; 
+    console.log('i', i, 'startAngle', this.startAngle, 'endAngle', endAngle);
+    var temp = this.startAngle;
+    this.arcs.push({ temp, endAngle });
+    this.startAngle = endAngle;
   }
 
   createPieGraph() {
+
     const arcs = d3.shape.pie()
+  }
+
+  wedges() {
+    // delay to allow Arc calculations to complete
+    return new Promise((resolve, reject) => {
+      Promise.delay(3000)
+      .then(() => {
+        return arcs;
+      }).map((arc, i) => {
+        return (
+          <Wedge
+            key={i}
+          />
+        )
+      });
+    });
   }
 
   render() {
@@ -88,7 +108,7 @@ export default class PieChart extends Component {
       <View width={200} height={200}>
         <Surface>
           <Group x={100} y={100}>
-
+            {this.wedges()}
           </Group>
         </Surface>
       </View>
