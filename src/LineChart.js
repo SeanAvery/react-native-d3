@@ -23,6 +23,8 @@ export default class LineChart extends Component {
     const padding_size = 20;
     const tick_width = padding_size * 2;
 
+    const yAccessor = d => d.temperatureMax;
+
     const data = createLineGraph({
       data: weather_data.daily.data,
       width: size,
@@ -58,6 +60,27 @@ export default class LineChart extends Component {
             );
           })}
         </View>
+
+        <View key={'ticksY'}>
+          {data.ticks.map((tick, index) => {
+            const value = yAccessor(tick.datum);
+
+            const tickStyles = {};
+            tickStyles.width = tick_width;
+            tickStyles.left = tick.x - Math.round(tick_width * 0.5);
+
+            tickStyles.top = (tick.y + 2) - Math.round(tick_width * 0.65);
+
+            return (
+              <View key={index} style={[styles.tickLabelY, tickStyles]}>
+                <Text style={styles.tickLabelYText}>
+                  {value}
+                </Text>
+              </View>
+            );
+          })}
+        </View>
+
       </View>
     )
   }
@@ -73,4 +96,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'center'
   },
+  tickLabelY: {
+    position: 'absolute',
+    width: 2,
+    height: 2,
+    backgroundColor: 'red',
+    borderRadius: 100,
+  }
 });
