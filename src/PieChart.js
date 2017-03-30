@@ -25,11 +25,25 @@ const d3 = {
   array,
 };
 
+import { Wedge } from './pie-chart-lib/Wedge'
 
 export default class PieChart extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  createPieGraph() {
+    const arcs = d3.shape.pie()
+  }
+
   render() {
     return (
-      <View>
+      <View width={200} height={200}>
+        <Surface>
+          <Group x={100} y={100}>
+            <Wedge />
+          </Group>
+        </Surface>
       </View>
     );
   }
