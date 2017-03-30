@@ -8,12 +8,26 @@ const {
   Path,
 } = ART;
 
-class Wedge extends Component {
+export default class Wedge extends Component {
   constructor(props) {
     super(props);
   }
+
+  createCirclePath(outerRadius, innerRadius) {
+
+  }
+
+  createArcPath(originX, originY, startAngle, endAngle, outerRadius, innerRadius) {
+
+  }
+
   render() {
-    <Shape>
-    </Shape>
+    let path;
+    const startAngle = this.props.startAngle;
+    const endAngle = this.props.endAngle;
+    console.log('startAngle', startAngle)
+    return (
+      <Shape {...this.props} d={path} />
+    )
   }
 }
