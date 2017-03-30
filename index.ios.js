@@ -4,7 +4,7 @@
  * @flow
  */
 import LineChart from './src/LineChart';
-
+import PieChart from './src/PieChart';
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -15,11 +15,9 @@ import {
 
 export default class react_native_d3 extends Component {
   render() {
-    console.log('checking console')
-    console.log('LineChart', LineChart)
     return (
       <View>
-        <LineChart />
+        <PieChart />
       </View>
     );
   }
