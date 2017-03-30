@@ -1,4 +1,4 @@
-export const data = [
+export var data = [
     {"number":  8, "name": 'Fun activities'},
     {"number": 7, "name": 'Dog'},
     {"number": 16, "name": 'Food'},
