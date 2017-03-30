@@ -7,8 +7,24 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import data from './data/pie-data';
-console.log('data', data);
+import { data } from './data/pie-data';
+
+const {
+  Group,
+  Shape,
+  Surface,
+} = ART;
+
+import * as scale from 'd3-scale';
+import * as shape from 'd3-shape';
+import * as array from 'd3-array';
+
+const d3 = {
+  scale,
+  shape,
+  array,
+};
+
 
 export default class PieChart extends Component {
   render() {
