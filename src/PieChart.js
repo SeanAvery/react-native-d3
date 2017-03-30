@@ -42,14 +42,15 @@ export default class PieChart extends Component {
     }).then(() => {
       return this.getSectors();
     }).then(() => {
-      console.log('this.sectors', this.sectors)
+      return this.getArcs();
+    }).then(() => {
+
     }).catch((error) => {
       console.log(error)
     });
   }
 
   getSum() {
-    console.log('calculating angles...')
     data.forEach(n => {
       this.sum += n.number;
       console.log('n', n);
@@ -58,6 +59,21 @@ export default class PieChart extends Component {
 
   getSectors() {
     this.sectors = data.map(n => Math.floor(360 * (n.number/this.sum)));
+  }
+
+  getArcs() {
+    Promise.delay(0)
+    .then(() => {
+      return this.sectors;
+    }).map((sector, i) => {
+      calculateArc(sector);
+    }).then(() => {
+
+    })
+  }
+
+  claculateArc(sector) {
+    // let endAngle
   }
 
   createPieGraph() {
