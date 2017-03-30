@@ -32,6 +32,7 @@ export default class PieChart extends Component {
   constructor(props) {
     super(props);
     this.sum = 0;
+    this.sectors =[];
     this.arcs = [];
   }
 
@@ -39,7 +40,9 @@ export default class PieChart extends Component {
     Promise.delay(0).then(() => {
       return this.getSum();
     }).then(() => {
-      return this.createArcs();
+      return this.getSectors();
+    }).then(() => {
+      console.log('this.sectors', this.sectors)
     }).catch((error) => {
       console.log(error)
     });
@@ -53,9 +56,8 @@ export default class PieChart extends Component {
     })
   }
 
-  createArcs() {
-    const sectors = data.map(n => Math.floor(360 * (n.number/this.sum)));
-    console.log('sectors', sectors);
+  getSectors() {
+    this.sectors = data.map(n => Math.floor(360 * (n.number/this.sum)));
   }
 
   createPieGraph() {
