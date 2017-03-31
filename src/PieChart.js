@@ -38,6 +38,7 @@ export default class PieChart extends Component {
     this.sectors =[];
     this.arcs = [];
     this.startAngle = 0;
+    this.sliceColors = ['#F44336','#2196F3','#FFEB3B', '#4CAF50', '#FF9800', '#4CAF50', '#2196F3']
   }
 
   componentWillMount() {
@@ -91,10 +92,13 @@ export default class PieChart extends Component {
   }
 
   wedges() {
+    console.log('this.sliceColors', this.sliceColors)
     return this.state.arcs.map((arc, i) => {
       return (
         <Wedge
           key={i}
+          fill={this.sliceColors[i]}
+          {...arc}
         />
       )
     })
