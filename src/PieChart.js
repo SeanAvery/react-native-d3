@@ -31,6 +31,9 @@ import { Wedge } from './pie-chart-lib/Wedge'
 export default class PieChart extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      arcs: []
+    }
     this.sum = 0;
     this.sectors =[];
     this.arcs = [];
@@ -69,7 +72,7 @@ export default class PieChart extends Component {
     }).map((sector, i) => {
       this.calculateArc(sector, i);
     }).then(() => {
-
+      this.setState({arcs: this.arcs});
     })
   }
 
@@ -88,27 +91,22 @@ export default class PieChart extends Component {
   }
 
   wedges() {
-    // delay to allow Arc calculations to complete
-    return new Promise((resolve, reject) => {
-      Promise.delay(3000)
-      .then(() => {
-        return arcs;
-      }).map((arc, i) => {
-        return (
-          <Wedge
-            key={i}
-          />
-        )
-      });
-    });
+    return this.state.arcs.map((arc, i) => {
+      return (
+        <Wedge
+          key={i}
+        />
+      )
+    })
   }
 
   render() {
+    console.log('this.wedges()', this.wedges)
     return (
       <View width={200} height={200}>
         <Surface>
           <Group x={100} y={100}>
-            {this.wedges()}
+            {this.wedges}
           </Group>
         </Surface>
       </View>
